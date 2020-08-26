@@ -1,8 +1,13 @@
 package com.example.instagramclone2.Profile;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.instagramclone2.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -14,12 +19,17 @@ import androidx.appcompat.widget.Toolbar;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 4;
+    private Context mContext= ProfileActivity.this;
+    private ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        mProgressBar = (ProgressBar)findViewById(R.id.profileProgressBar);
 
-        //setupBottomNavigationView();
+        mProgressBar.setVisibility(View.GONE);
+        setupBottomNavigationView();
         setupToolBar();
     }
 
@@ -28,17 +38,14 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.profileToolBar);
         setSupportActionBar(toolbar);
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        ImageView profileMenu = (ImageView)findViewById(R.id.profileMenu);
+        profileMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.profileMenu:
-
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,AccountSettingsActivity.class);
+                startActivity(intent);
             }
         });
-
     }
 
     public void setupBottomNavigationView(){
@@ -48,11 +55,5 @@ public class ProfileActivity extends AppCompatActivity {
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.profile_menu,menu);
-        return true;
     }
 }
