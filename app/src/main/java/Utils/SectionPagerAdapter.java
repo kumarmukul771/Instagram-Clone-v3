@@ -1,11 +1,4 @@
-package com.example.instagramclone2.Home;
-
-import android.graphics.drawable.Drawable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
-
-import com.example.instagramclone2.R;
+package Utils;
 
 import java.util.ArrayList;
 import java.util.List;
